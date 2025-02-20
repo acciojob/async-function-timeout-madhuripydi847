@@ -1,22 +1,16 @@
 document.getElementById("btn").addEventListener("click", async function () {
-    const textInput = document.getElementById("text").value;
-    const delayInput = parseInt(document.getElementById("delay").value, 10);
-    const outputDiv = document.getElementById("output");
-    
-    // Clear previous output
-    outputDiv.textContent = "";
-    
-    if (!textInput || isNaN(delayInput) || delayInput < 0) {
-        outputDiv.textContent = "Please enter valid text and delay time.";
+    const text = document.getElementById("text").value;
+    const delay = parseInt(document.getElementById("delay").value);
+
+    if (!text || isNaN(delay) || delay < 0) {
+        alert("Please enter a valid message and a non-negative delay.");
         return;
     }
 
-    // Function to introduce delay using Promise
-    function delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-    
-    // Await the delay and then display the message
-    await delay(delayInput);
-    outputDiv.textContent = textInput;
+    await delayMessage(delay);
+    document.getElementById("output").innerText = text;
 });
+
+function delayMessage(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
