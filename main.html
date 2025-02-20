@@ -1,20 +1,22 @@
-<!DOCTYPE html>
+document.getElementById("btn").addEventListener("click", async function () {
+    const textInput = document.getElementById("text").value;
+    const delayInput = parseInt(document.getElementById("delay").value, 10);
+    const outputDiv = document.getElementById("output");
+    
+    // Clear previous output
+    outputDiv.textContent = "";
+    
+    if (!textInput || isNaN(delayInput) || delayInput < 0) {
+        outputDiv.textContent = "Please enter valid text and delay time.";
+        return;
+    }
 
-<html>
-  <head>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-
-  <body>
-    <!-- the entire body must be written by student -->
-    <form onsubmit="return false">
-      <input type="text" id="text" placeholder="Text" />
-      <input type="number" id="delay" placeholder="Delay" />
-      <button type="button" id="btn">Submit</button>
-    </form>
-
-    <div id="output"></div>
-
-    <script type="text/javascript" src="./script.js"></script>
-  </body>
-</html>
+    // Function to introduce delay using Promise
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    
+    // Await the delay and then display the message
+    await delay(delayInput);
+    outputDiv.textContent = textInput;
+});
